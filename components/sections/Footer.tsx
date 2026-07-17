@@ -4,7 +4,6 @@ import Parallax from "@/components/Parallax";
 const SOCIALS = [
   { label: "Instagram", href: "#" },
   { label: "TikTok", href: "#" },
-  { label: "YouTube", href: "#" },
   { label: "X / Twitter", href: "#" },
 ];
 
