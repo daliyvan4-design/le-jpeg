@@ -1,37 +1,7 @@
 import GlitchText from "@/components/GlitchText";
 import Reveal from "@/components/Reveal";
-
-type Member = {
-  role: string;
-  desc: string;
-};
-
-const MEMBERS: Member[] = [
-  {
-    role: "Direction artistique · Fondateur",
-    desc: "Cadre la ligne visuelle et signe la direction de chaque numéro.",
-  },
-  {
-    role: "Rédaction en chef",
-    desc: "Écrit, édite, et tient le ton éditorial du média.",
-  },
-  {
-    role: "Photographie",
-    desc: "Capte les créateurs dans leur quotidien, après le succès.",
-  },
-  {
-    role: "Réalisation · Vidéo",
-    desc: "Filme les coulisses : le script, le croquis, ça tourne.",
-  },
-  {
-    role: "Design & Motion",
-    desc: "Décline l'identité JPEG en glitch, motion et print.",
-  },
-  {
-    role: "Digital & Développement",
-    desc: "Encode le média sur le web et fait vivre la communauté.",
-  },
-];
+import MemberPhoto from "@/components/MemberPhoto";
+import { MEMBERS } from "@/lib/members";
 
 export default function Qui() {
   return (
@@ -62,42 +32,28 @@ export default function Qui() {
         </Reveal>
       </div>
 
-      <div className="mb-[18px] border-t-[1.5px] border-cream/30 pt-[14px] font-mono text-[12px] uppercase tracking-[0.14em] opacity-70">
-        Les membres · noms, surnoms &amp; photos à remplacer
-      </div>
-
       <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-[clamp(14px,1.6vw,22px)]">
         {MEMBERS.map((m, i) => (
           <Reveal
-            key={m.role}
+            key={m.photo}
             delay={(i % 3) * 0.06}
             className="overflow-hidden border-2 border-black bg-cream text-ink"
           >
             <article className="flex h-full flex-col">
-              {/* Photo placeholder */}
+              {/* Photo — slot réservé, remplacé dès que la photo est déposée */}
               <div className="relative aspect-[4/5] border-b-2 border-black bg-creamLight">
-                <div className="absolute inset-0 flex items-center justify-center font-mono text-[12px] uppercase tracking-[0.08em] text-black/40">
-                  Photo membre {String(i + 1).padStart(2, "0")}
-                </div>
-                {/* compression-block accent */}
-                <div className="absolute bottom-3 left-3 grid grid-cols-4 border border-black/60">
-                  {["#fbc904", "#af2a16", "#155dd5", "#fd6b04", "#039c4b", "#fca1d3", "#000", "#fcedd5"].map(
-                    (c, k) => (
-                      <span
-                        key={k}
-                        style={{ background: c }}
-                        className="h-[7px] w-[7px]"
-                      />
-                    )
-                  )}
-                </div>
+                <MemberPhoto
+                  src={m.photo}
+                  alt={`${m.name} · ${m.nickname}`}
+                  nickname={m.nickname}
+                />
               </div>
               <div className="p-[16px_18px_20px]">
                 <div className="font-display text-[20px] uppercase leading-none">
-                  Prénom Nom
+                  {m.name}
                 </div>
                 <div className="mt-[6px] font-mono text-[12px] text-brick">
-                  «&nbsp;Le Surnom&nbsp;»
+                  «&nbsp;{m.nickname}&nbsp;»
                 </div>
                 <div className="mt-[12px] font-soft text-[13px] font-bold">
                   {m.role}

@@ -45,12 +45,6 @@ export default function Hero() {
         leur nom nulle part. Regard local, ambition internationale : brut,
         version&nbsp;art.
       </p>
-
-      {/* Scroll cue */}
-      <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-brick">
-        <span>Scroll</span>
-        <span className="block h-[34px] w-px animate-scrollcue bg-brick" />
-      </div>
     </section>
   );
 }
