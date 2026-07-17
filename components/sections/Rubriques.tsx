@@ -82,7 +82,7 @@ export default function Rubriques() {
               <span className="font-mono text-[12px]">{r.code}</span>
               <span
                 style={{ background: r.dot }}
-                className="h-4 w-4 rounded-full border-2 border-black transition-transform duration-300 group-hover:scale-125"
+                className="h-4 w-4 rounded-full border-2 border-black transition-transform duration-300 group-hover:scale-125 group-active:scale-150"
               />
             </div>
             <h3 className="m-0 font-display text-[26px] uppercase leading-[0.95] text-ink">

@@ -3,6 +3,12 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 
+declare global {
+  interface Window {
+    __lenis?: Lenis;
+  }
+}
+
 /**
  * Wraps the app in a Lenis smooth-scroll instance.
  * Disabled when the user prefers reduced motion so the site stays
@@ -25,6 +31,8 @@ export default function SmoothScroll({
       smoothWheel: true,
       touchMultiplier: 1.6,
     });
+    // Expose so the mobile menu can pause scroll while open.
+    window.__lenis = lenis;
 
     // Smooth-scroll in-page anchor links (nav + logo).
     const onClick = (e: MouseEvent) => {
@@ -53,6 +61,7 @@ export default function SmoothScroll({
       cancelAnimationFrame(rafId);
       document.removeEventListener("click", onClick);
       lenis.destroy();
+      if (window.__lenis === lenis) delete window.__lenis;
     };
   }, []);
 

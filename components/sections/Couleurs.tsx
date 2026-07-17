@@ -19,8 +19,16 @@ const SWATCHES: Swatch[] = [
 
 export default function Couleurs() {
   const [copied, setCopied] = useState<number | null>(null);
+  const [glitch, setGlitch] = useState<number | null>(null);
+
+  // Tap glitch — works on touch where :hover never fires.
+  const flash = (i: number) => {
+    setGlitch(i);
+    window.setTimeout(() => setGlitch((g) => (g === i ? null : g)), 420);
+  };
 
   const copy = async (hex: string, i: number) => {
+    flash(i);
     try {
       await navigator.clipboard.writeText(hex);
     } catch {
@@ -58,7 +66,14 @@ export default function Couleurs() {
             className="group relative flex items-center justify-center font-mono text-[clamp(15px,1.7vw,22px)] font-bold outline-none focus-visible:z-10 focus-visible:ring-4 focus-visible:ring-brick"
             aria-label={`Copier ${s.hex}`}
           >
-            <span className="transition-[text-shadow,transform] duration-150 group-hover:[text-shadow:3px_0_#155dd5,-3px_0_#af2a16] group-active:translate-x-[1px]">
+            <span
+              style={
+                glitch === i
+                  ? { textShadow: "4px 0 #155dd5, -4px 0 #af2a16" }
+                  : undefined
+              }
+              className="transition-[text-shadow,transform] duration-150 group-hover:[text-shadow:3px_0_#155dd5,-3px_0_#af2a16] group-active:translate-x-[1px]"
+            >
               {copied === i ? "copié !" : s.hex}
             </span>
             <span

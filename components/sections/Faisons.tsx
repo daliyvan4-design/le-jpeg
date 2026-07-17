@@ -21,6 +21,7 @@ const CYCLE_MS = 1700;
 export default function Faisons() {
   const [active, setActive] = useState(0);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const paused = useRef(false);
 
   useEffect(() => {
@@ -35,14 +36,24 @@ export default function Faisons() {
       timer.current = null;
     };
     start();
-    return stop;
+    return () => {
+      stop();
+      if (resumeTimer.current) clearTimeout(resumeTimer.current);
+    };
   }, []);
 
+  // Pause the auto-cycle on interaction. On touch there's no mouseleave, so
+  // schedule an automatic resume so the bands keep breathing.
   const select = (i: number) => {
     paused.current = true;
     setActive(i);
+    if (resumeTimer.current) clearTimeout(resumeTimer.current);
+    resumeTimer.current = setTimeout(() => {
+      paused.current = false;
+    }, 2600);
   };
   const resume = () => {
+    if (resumeTimer.current) clearTimeout(resumeTimer.current);
     paused.current = false;
   };
 
@@ -63,6 +74,7 @@ export default function Faisons() {
             <motion.div
               key={band.label + i}
               onMouseEnter={() => select(i)}
+              onPointerDown={() => select(i)}
               initial={{ opacity: 0, x: -48 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.4 }}

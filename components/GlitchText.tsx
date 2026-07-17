@@ -1,15 +1,14 @@
 "use client";
 
-import { useRef } from "react";
-import { useInView } from "framer-motion";
+import { useEffect, useRef } from "react";
 
 type Tag = "h1" | "h2" | "h3" | "span" | "div";
 
 /**
  * A heading that fires a short RGB-split "compression" glitch burst when it
- * scrolls into view and again on hover. Kept subtle and editorial — one
- * pass, never looping. The `animate-glitchBurst` class below is a literal so
- * Tailwind keeps the keyframes in the build.
+ * scrolls into view and again on interaction. On desktop that's hover; on
+ * touch it fires on tap (pointerdown) so the effect is never hover-locked.
+ * The `animate-glitchBurst` literal keeps the keyframes in the Tailwind build.
  */
 export default function GlitchText({
   as = "h2",
@@ -21,8 +20,6 @@ export default function GlitchText({
   className?: string;
 }) {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.25 });
-  const firedOnView = useRef(false);
 
   const fire = () => {
     const el = ref.current;
@@ -33,19 +30,31 @@ export default function GlitchText({
     el.classList.add("animate-glitchBurst");
   };
 
-  // Fire once when it enters the viewport.
-  if (inView && !firedOnView.current) {
-    firedOnView.current = true;
-    // Defer to the next frame so the node is painted first.
-    requestAnimationFrame(fire);
-  }
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            fire();
+            io.unobserve(e.target);
+          }
+        }
+      },
+      { threshold: 0.2 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   const Tag = as as React.ElementType;
 
   return (
     <Tag
       ref={ref}
-      onMouseEnter={fire}
+      onPointerEnter={fire}
+      onPointerDown={fire}
       className={`[will-change:transform] ${className}`}
     >
       {children}
