@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Poppins:wght@600;700;800&family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #fff9ee; font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; color: #141414; overflow-x: hidden; }
+  a { color: #af2a16; text-decoration: none; }
+  a:hover { color: #7f1e0f; }
+  img { max-width: 100%; display: block; }
+  ::selection { background: #af2a16; color: #fff9ee; }
+  @keyframes logoIn {
+    0% { opacity: 0; filter: drop-shadow(10px 0 #155dd5) drop-shadow(-10px 0 #af2a16); clip-path: inset(0 0 66% 0); transform: translateX(-8px); }
+    30% { opacity: 1; filter: drop-shadow(-8px 0 #fd6b04) drop-shadow(8px 0 #039c4b); clip-path: inset(0 0 20% 0); transform: translateX(6px); }
+    55% { filter: drop-shadow(6px 0 #155dd5) drop-shadow(-6px 0 #af2a16); clip-path: inset(0 0 40% 0); transform: translateX(-3px); }
+    80% { filter: none; clip-path: inset(0 0 0 0); transform: translateX(1px); }
+    100% { opacity: 1; filter: none; clip-path: inset(0 0 0 0); transform: none; }
+  }
+  @keyframes glitchBurst {
+    0% { text-shadow: 4px 0 #155dd5, -4px 0 #af2a16; transform: translate(0,0); }
+    25% { text-shadow: -5px 0 #fd6b04, 5px 0 #039c4b; transform: translate(3px,-1px); }
+    50% { text-shadow: 4px 0 #af2a16, -4px 0 #155dd5; transform: translate(-3px,1px); }
+    72% { text-shadow: -2px 0 #fbc904, 2px 0 #af2a16; transform: translate(2px,0); }
+    100% { text-shadow: none; transform: none; }
+  }
+  @keyframes scrollcue { 0%,100% { transform: translateY(0); opacity: .4; } 50% { transform: translateY(8px); opacity: 1; } }
+  @keyframes flick { 0%,92%,100% { opacity: 1; } 94% { opacity: .35; } 96% { opacity: .85; } }
+</style>
+</helmet>
+
+<div ref="{{ setRoot }}" style="position:relative; width:100%; overflow:hidden;">
+
+  <!-- ================= FIXED HEADER ================= -->
+  <header ref="{{ setHeader }}" style="position:fixed; top:0; left:0; right:0; height:66px; z-index:60; display:flex; align-items:center; justify-content:space-between; padding:0 clamp(16px,4vw,46px); color:#141414; mix-blend-mode:normal;">
+    <a href="#hero" style="display:flex; align-items:center; height:66px; color:inherit;">
+      <img src="uploads/ROUGE.png" alt="JPEG" style="height:30px; width:auto;">
+    </a>
+    <nav style="display:flex; align-items:center; gap:clamp(12px,2vw,30px); font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.06em; text-transform:uppercase;">
+      <a href="#manifeste" style="color:inherit;">Pourquoi ?</a>
+      <a href="#faisons" style="color:inherit;">Quoi ?</a>
+      <a href="#qui" style="color:inherit;">Qui ?</a>
+      <a href="#rubriques" style="color:inherit;">Comment ?</a>
+      <a href="#couleurs" style="color:inherit;">Identité ?</a>
+      <a href="#contact" style="color:inherit; border:1.5px solid currentColor; padding:6px 12px;">Yakoi ?</a>
+    </nav>
+    <div data-headerline style="position:absolute; left:0; right:0; bottom:0; height:1px; background:rgba(20,20,20,.18);"></div>
+  </header>
+
+  <!-- ================= 1. HERO ================= -->
+  <section id="hero" data-bg="cream" style="position:relative; min-height:100vh; background:#fff9ee; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:120px clamp(20px,5vw,70px) 70px; text-align:center;">
+    <div style="display:flex; justify-content:space-between; width:100%; max-width:1200px; font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#af2a16; margin-bottom:clamp(24px,5vh,60px);">
+      <span>N°01 — Abidjan / Monde</span>
+      <span>Encodé le · 2026</span>
+    </div>
+    <div data-parallax="0.08" style="width:100%; max-width:1080px;">
+      <img src="uploads/ROUGE.png" alt="JPEG" style="width:100%; height:auto; animation:logoIn 1.1s cubic-bezier(.2,.8,.2,1) both;">
+    </div>
+    <div style="display:flex; align-items:baseline; gap:clamp(14px,3vw,40px); flex-wrap:wrap; justify-content:center; margin-top:clamp(20px,4vh,44px);">
+      <h1 style="margin:0; font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:clamp(28px,6vw,74px); line-height:0.9; letter-spacing:-0.01em; color:#141414;">Le média d'art</h1>
+      <span style="font-family:'Space Mono',monospace; font-weight:700; font-size:clamp(20px,3.5vw,40px); color:#af2a16;">2026</span>
+    </div>
+    <p style="max-width:640px; margin:clamp(20px,3.5vh,34px) auto 0; font-size:clamp(15px,1.7vw,20px); line-height:1.5; color:#3a3a3a; text-wrap:pretty;">
+      On met en lumière ceux qui fabriquent le beau. Leur travail est partout, leur nom nulle part. Regard local, ambition internationale — brut, version&nbsp;art.
+    </p>
+    <div style="position:absolute; bottom:26px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:8px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:#af2a16;">
+      <span>Scroll</span>
+      <span style="display:block; width:1px; height:34px; background:#af2a16; animation:scrollcue 1.6s ease-in-out infinite;"></span>
+    </div>
+  </section>
+
+  <!-- ================= 2. MANIFESTE ================= -->
+  <section id="manifeste" data-bg="red" style="position:relative; min-height:100vh; background:#af2a16; color:#fff9ee; display:flex; flex-direction:column; justify-content:center; padding:clamp(90px,12vh,150px) clamp(20px,6vw,110px); overflow:hidden;">
+    <div style="font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; opacity:0.8; margin-bottom:clamp(30px,6vh,64px);">02 / Pourquoi ?</div>
+    <h2 data-reveal data-glitch style="margin:0; font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:clamp(34px,7.5vw,110px); line-height:0.92; letter-spacing:-0.02em; text-wrap:balance; max-width:15ch;">
+      Mettre en lumière ceux qui fabriquent le beau.
+    </h2>
+    <div style="display:flex; flex-wrap:wrap; gap:clamp(28px,6vw,90px); margin-top:clamp(40px,8vh,90px); max-width:1000px;">
+      <p data-reveal style="flex:1 1 300px; margin:0; font-size:clamp(16px,1.9vw,23px); line-height:1.5; text-wrap:pretty;">
+        Pas une chasse aux stars ni au buzz. Plutôt ceux dont le travail est <em style="font-style:normal; text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:5px;">partout</em> mais dont le nom est <em style="font-style:normal; text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:5px;">nulle part</em>.
+      </p>
+      <p data-reveal style="flex:1 1 300px; margin:0; font-size:clamp(16px,1.9vw,23px); line-height:1.5; text-wrap:pretty;">
+        Un objet de presse d'art, pas un site de startup. Ton éditorial, geste brut. On décompresse le réel — et on assume les artefacts.
+      </p>
+    </div>
+    <div style="margin-top:clamp(40px,7vh,80px); font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:clamp(20px,3vw,40px); letter-spacing:-0.01em;">
+      Brut. <span style="color:#fbc904;">Version art.</span>
+    </div>
+  </section>
+
+  <!-- ================= 3. CE QUE NOUS FAISONS / QUOI ? ================= -->
+  <section id="faisons" data-bg="cream" style="position:relative; min-height:100vh; background:#fff9ee; display:flex;">
+    <div onMouseLeave="{{ onBandsLeave }}" style="flex:1; display:flex; flex-direction:column; padding-top:66px;">
+      <div data-band data-band-index="0" onMouseEnter="{{ onBandEnter }}" style="flex:1; display:flex; align-items:center; padding:0 clamp(18px,4vw,60px); background:#fca1d3; cursor:pointer; position:relative;"><span data-band-dot style="width:clamp(14px,1.6vw,22px); height:clamp(14px,1.6vw,22px); border-radius:50%; background:#000; margin-right:clamp(16px,2vw,30px); flex:none; transition:transform .35s cubic-bezier(.2,.8,.2,1);"></span><span data-band-label style="font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:clamp(22px,4.6vw,58px); color:#000; letter-spacing:-0.01em; transition:transform .35s cubic-bezier(.2,.8,.2,1);">Design</span></div>
+      <div data-band data-band-index="1" onMouseEnter="{{ onBandEnter }}" style="flex:1; display:flex; align-items:center; padding:0 clamp(18px,4vw,60px); background:#155dd5; cursor:pointer; position:relative;"><span data-band-dot style="width:clamp(14px,1.6vw,22px); height:clamp(14px,1.6vw,22px); border-radius:50%; background:#000; margin-right:clamp(16px,2vw,30px); flex:none; transition:transform .35s cubic-bezier(.2,.8,.2,1);"></span><span data-band-label style="font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:clamp(22px,4.6vw,58px); color:#000; letter-spacing:-0.01em; transition:transform .35s cubic-bezier(.2,.8,.2,1);">Musique</span></div>
+      <div data-band data-band-index="2" onMouseEnter="{{ onBandEnter }}" style="flex:1; display:flex; align-items:center; padding:0 clamp(18px,4vw,60px); background:#fbc904; cursor:pointer; position:relative;"><span data-band-dot style="width:clamp(14px,1.6vw,22px); height:clamp(14px,1.6vw,22px); border-radius:50%; background:#000; margin-right:clamp(16px,2vw,30px); flex:none; transition:transform .35s cubic-bezier(.2,.8,.2,1);"></span><span data-band-label style="font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:clamp(22px,4.6vw,58px); color:#000; letter-spacing:-0.01em; transition:transform .35s cubic-bezier(.2,.8,.2,1);">Culture / Info</span></div>
+      <div data-band data-band-index="3" onMouseEnter="{{ onBandEnter }}" style="flex:1; display:flex; align-items:center; padding:0 clamp(18px,4vw,60px); background:#fd6b04; cursor:pointer; position:relative;"><span data-band-dot style="width:clamp(14px,1.6vw,22px); height:clamp(14px,1.6vw,22px); border-radius:50%; background:#000; margin-right:clamp(16px,2vw,30px); flex:none; transition:transform .35s cubic-bezier(.2,.8,.2,1);"></span><span data-band-label style="font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:clamp(22px,4.6vw,58px); color:#000; letter-spacing:-0.01em; transition:transform .35s cubic-bezier(.2,.8,.2,1);">Cinéma</span></div>
+      <div data-band data-band-index="4" onMouseEnter="{{ onBandEnter }}" style="flex:1; display:flex; align-items:center; padding:0 clamp(18px,4vw,60px); background:#af2a16; cursor:pointer; position:relative;"><span data-band-dot style="width:clamp(14px,1.6vw,22px); height:clamp(14px,1.6vw,22px); border-radius:50%; background:#000; margin-right:clamp(16px,2vw,30px); flex:none; transition:transform .35s cubic-bezier(.2,.8,.2,1);"></span><span data-band-label style="font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:clamp(22px,4.6vw,58px); color:#000; letter-spacing:-0.01em; transition:transform .35s cubic-bezier(.2,.8,.2,1);">Production</span></div>
+      <div data-band data-band-index="5" onMouseEnter="{{ onBandEnter }}" style="flex:1; display:flex; align-items:center; padding:0 clamp(18px,4vw,60px); background:#155dd5; cursor:pointer; position:relative;"><span data-band-dot style="width:clamp(14px,1.6vw,22px); height:clamp(14px,1.6vw,22px); border-radius:50%; background:#000; margin-right:clamp(16px,2vw,30px); flex:none; transition:transform .35s cubic-bezier(.2,.8,.2,1);"></span><span data-band-label style="font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:clamp(22px,4.6vw,58px); color:#000; letter-spacing:-0.01em; transition:transform .35s cubic-bezier(.2,.8,.2,1);">Architecture</span></div>
+      <div data-band data-band-index="6" onMouseEnter="{{ onBandEnter }}" style="flex:1; display:flex; align-items:center; padding:0 clamp(18px,4vw,60px); background:#fbc904; cursor:pointer; position:relative;"><span data-band-dot style="width:clamp(14px,1.6vw,22px); height:clamp(14px,1.6vw,22px); border-radius:50%; background:#000; margin-right:clamp(16px,2vw,30px); flex:none; transition:transform .35s cubic-bezier(.2,.8,.2,1);"></span><span data-band-label style="font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:clamp(22px,4.6vw,58px); color:#000; letter-spacing:-0.01em; transition:transform .35s cubic-bezier(.2,.8,.2,1);">Danse</span></div>
+      <div data-band data-band-index="7" onMouseEnter="{{ onBandEnter }}" style="flex:1; display:flex; align-items:center; padding:0 clamp(18px,4vw,60px); background:#fca1d3; cursor:pointer; position:relative;"><span data-band-dot style="width:clamp(14px,1.6vw,22px); height:clamp(14px,1.6vw,22px); border-radius:50%; background:#000; margin-right:clamp(16px,2vw,30px); flex:none; transition:transform .35s cubic-bezier(.2,.8,.2,1);"></span><span data-band-label style="font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:clamp(22px,4.6vw,58px); color:#000; letter-spacing:-0.01em; transition:transform .35s cubic-bezier(.2,.8,.2,1);">Spectacle</span></div>
+    </div>
+    <div style="position:relative; width:clamp(150px,15vw,220px); background:#fff9ee; border-left:2px solid #000;">
+      <div style="position:absolute; left:0; top:66px; bottom:0; width:40px; display:flex; align-items:center; justify-content:center; z-index:2; pointer-events:none;"><div style="transform:rotate(90deg); white-space:nowrap; font-family:'Bricolage Grotesque',sans-serif; font-weight:700; text-transform:uppercase; font-size:clamp(10px,1.05vw,13px); letter-spacing:0.14em; color:rgba(20,20,20,.45);">Le média d'art&nbsp;&nbsp;·&nbsp;&nbsp;<span style="color:#af2a16;">Le JPEG</span>&nbsp;&nbsp;·&nbsp;&nbsp;2026</div></div>
+      <div style="position:absolute; inset:66px 0 0 40px; display:flex; flex-direction:column;">
+        <div data-side-marker style="position:absolute; left:0; top:0; width:100%; height:12.5%; background:rgba(20,20,20,.05); border-left:8px solid #fca1d3; transform:translateY(0); transition:transform .45s cubic-bezier(.7,0,.2,1), border-color .45s ease; z-index:0; pointer-events:none;"></div>
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; position:relative; z-index:1;"><span data-side-label style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; text-transform:uppercase; font-size:clamp(9px,1vw,13px); letter-spacing:0.005em; white-space:nowrap; transform:rotate(90deg); transition:color .3s ease, transform .35s cubic-bezier(.2,.8,.2,1); color:rgba(20,20,20,.3);">Design</span></div>
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; position:relative; z-index:1;"><span data-side-label style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; text-transform:uppercase; font-size:clamp(9px,1vw,13px); letter-spacing:0.005em; white-space:nowrap; transform:rotate(90deg); transition:color .3s ease, transform .35s cubic-bezier(.2,.8,.2,1); color:rgba(20,20,20,.3);">Musique</span></div>
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; position:relative; z-index:1;"><span data-side-label style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; text-transform:uppercase; font-size:clamp(9px,1vw,13px); letter-spacing:0.005em; white-space:nowrap; transform:rotate(90deg); transition:color .3s ease, transform .35s cubic-bezier(.2,.8,.2,1); color:rgba(20,20,20,.3);">Culture / Info</span></div>
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; position:relative; z-index:1;"><span data-side-label style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; text-transform:uppercase; font-size:clamp(9px,1vw,13px); letter-spacing:0.005em; white-space:nowrap; transform:rotate(90deg); transition:color .3s ease, transform .35s cubic-bezier(.2,.8,.2,1); color:rgba(20,20,20,.3);">Cinéma</span></div>
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; position:relative; z-index:1;"><span data-side-label style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; text-transform:uppercase; font-size:clamp(9px,1vw,13px); letter-spacing:0.005em; white-space:nowrap; transform:rotate(90deg); transition:color .3s ease, transform .35s cubic-bezier(.2,.8,.2,1); color:rgba(20,20,20,.3);">Production</span></div>
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; position:relative; z-index:1;"><span data-side-label style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; text-transform:uppercase; font-size:clamp(9px,1vw,13px); letter-spacing:0.005em; white-space:nowrap; transform:rotate(90deg); transition:color .3s ease, transform .35s cubic-bezier(.2,.8,.2,1); color:rgba(20,20,20,.3);">Architecture</span></div>
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; position:relative; z-index:1;"><span data-side-label style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; text-transform:uppercase; font-size:clamp(9px,1vw,13px); letter-spacing:0.005em; white-space:nowrap; transform:rotate(90deg); transition:color .3s ease, transform .35s cubic-bezier(.2,.8,.2,1); color:rgba(20,20,20,.3);">Danse</span></div>
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; position:relative; z-index:1;"><span data-side-label style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; text-transform:uppercase; font-size:clamp(9px,1vw,13px); letter-spacing:0.005em; white-space:nowrap; transform:rotate(90deg); transition:color .3s ease, transform .35s cubic-bezier(.2,.8,.2,1); color:rgba(20,20,20,.3);">Spectacle</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 4. QUI SOMMES-NOUS ================= -->
+  <section id="qui" data-bg="red" style="position:relative; min-height:100vh; background:#af2a16; color:#fff9ee; padding:clamp(90px,12vh,140px) clamp(20px,6vw,90px);">
+    <div style="font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; opacity:0.8; margin-bottom:clamp(24px,5vh,50px);">04 / Qui ?</div>
+    <div style="display:flex; flex-wrap:wrap; gap:clamp(30px,6vw,80px); align-items:flex-end; margin-bottom:clamp(50px,9vh,110px);">
+      <h2 data-reveal data-glitch style="margin:0; flex:1 1 420px; font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:clamp(34px,6.5vw,92px); line-height:0.92; letter-spacing:-0.02em; max-width:14ch;">
+        Un collectif, pas une rédaction.
+      </h2>
+      <p data-reveal style="flex:1 1 300px; margin:0; font-size:clamp(16px,1.8vw,22px); line-height:1.55; text-wrap:pretty;">
+        Des designers, des plumes, des cadreurs et des curieux réunis autour d'une idée : documenter la création ivoirienne et africaine sans filtre. On travaille en bande, on signe en bande, on encode le réel ensemble.
+      </p>
+    </div>
+
+    <div style="font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; opacity:0.7; margin-bottom:18px; border-top:1.5px solid rgba(255,249,238,.3); padding-top:14px;">Les membres · noms, surnoms & photos à remplacer</div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:clamp(14px,1.6vw,22px);">
+
+      <article data-reveal style="background:#fff9ee; color:#141414; border:2px solid #000; overflow:hidden;">
+        <div style="position:relative; aspect-ratio:4/5; background:#fcedd5;"><image-slot id="jpeg-mem-1" shape="rect" placeholder="Photo membre 01"></image-slot></div>
+        <div style="padding:16px 18px 20px;">
+          <div style="font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:20px; line-height:1;">Prénom Nom</div>
+          <div style="font-family:'Space Mono',monospace; font-size:12px; color:#af2a16; margin-top:6px;">« Le Surnom »</div>
+          <div style="font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; margin-top:12px;">Direction artistique · Fondateur</div>
+          <p style="margin:8px 0 0; font-size:13px; line-height:1.45; color:#4a4a4a;">Cadre la ligne visuelle et signe la direction de chaque numéro.</p>
+        </div>
+      </article>
+
+      <article data-reveal style="background:#fff9ee; color:#141414; border:2px solid #000; overflow:hidden;">
+        <div style="position:relative; aspect-ratio:4/5; background:#fcedd5;"><image-slot id="jpeg-mem-2" shape="rect" placeholder="Photo membre 02"></image-slot></div>
+        <div style="padding:16px 18px 20px;">
+          <div style="font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:20px; line-height:1;">Prénom Nom</div>
+          <div style="font-family:'Space Mono',monospace; font-size:12px; color:#af2a16; margin-top:6px;">« Le Surnom »</div>
+          <div style="font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; margin-top:12px;">Rédaction en chef</div>
+          <p style="margin:8px 0 0; font-size:13px; line-height:1.45; color:#4a4a4a;">Écrit, édite, et tient le ton éditorial du média.</p>
+        </div>
+      </article>
+
+      <article data-reveal style="background:#fff9ee; color:#141414; border:2px solid #000; overflow:hidden;">
+        <div style="position:relative; aspect-ratio:4/5; background:#fcedd5;"><image-slot id="jpeg-mem-3" shape="rect" placeholder="Photo membre 03"></image-slot></div>
+        <div style="padding:16px 18px 20px;">
+          <div style="font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:20px; line-height:1;">Prénom Nom</div>
+          <div style="font-family:'Space Mono',monospace; font-size:12px; color:#af2a16; margin-top:6px;">« Le Surnom »</div>
+          <div style="font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; margin-top:12px;">Photographie</div>
+          <p style="margin:8px 0 0; font-size:13px; line-height:1.45; color:#4a4a4a;">Capte les créateurs dans leur quotidien, après le succès.</p>
+        </div>
+      </article>
+
+      <article data-reveal style="background:#fff9ee; color:#141414; border:2px solid #000; overflow:hidden;">
+        <div style="position:relative; aspect-ratio:4/5; background:#fcedd5;"><image-slot id="jpeg-mem-4" shape="rect" placeholder="Photo membre 04"></image-slot></div>
+        <div style="padding:16px 18px 20px;">
+          <div style="font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:20px; line-height:1;">Prénom Nom</div>
+          <div style="font-family:'Space Mono',monospace; font-size:12px; color:#af2a16; margin-top:6px;">« Le Surnom »</div>
+          <div style="font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; margin-top:12px;">Réalisation · Vidéo</div>
+          <p style="margin:8px 0 0; font-size:13px; line-height:1.45; color:#4a4a4a;">Filme les coulisses — le script, le croquis, ça tourne.</p>
+        </div>
+      </article>
+
+      <article data-reveal style="background:#fff9ee; color:#141414; border:2px solid #000; overflow:hidden;">
+        <div style="position:relative; aspect-ratio:4/5; background:#fcedd5;"><image-slot id="jpeg-mem-5" shape="rect" placeholder="Photo membre 05"></image-slot></div>
+        <div style="padding:16px 18px 20px;">
+          <div style="font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:20px; line-height:1;">Prénom Nom</div>
+          <div style="font-family:'Space Mono',monospace; font-size:12px; color:#af2a16; margin-top:6px;">« Le Surnom »</div>
+          <div style="font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; margin-top:12px;">Design & Motion</div>
+          <p style="margin:8px 0 0; font-size:13px; line-height:1.45; color:#4a4a4a;">Décline l'identité JPEG en glitch, motion et print.</p>
+        </div>
+      </article>
+
+      <article data-reveal style="background:#fff9ee; color:#141414; border:2px solid #000; overflow:hidden;">
+        <div style="position:relative; aspect-ratio:4/5; background:#fcedd5;"><image-slot id="jpeg-mem-6" shape="rect" placeholder="Photo membre 06"></image-slot></div>
+        <div style="padding:16px 18px 20px;">
+          <div style="font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:20px; line-height:1;">Prénom Nom</div>
+          <div style="font-family:'Space Mono',monospace; font-size:12px; color:#af2a16; margin-top:6px;">« Le Surnom »</div>
+          <div style="font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; margin-top:12px;">Digital & Développement</div>
+          <p style="margin:8px 0 0; font-size:13px; line-height:1.45; color:#4a4a4a;">Encode le média sur le web et fait vivre la communauté.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ================= 5. NOS RUBRIQUES ================= -->
+  <section id="rubriques" data-bg="cream" style="position:relative; min-height:100vh; background:#fff9ee; padding:clamp(90px,12vh,140px) clamp(20px,6vw,90px);">
+    <div style="font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:#af2a16; margin-bottom:clamp(20px,4vh,40px);">05 / Comment ?</div>
+    <h2 data-reveal data-glitch style="margin:0 0 clamp(40px,7vh,72px); font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:clamp(32px,6vw,84px); line-height:0.92; letter-spacing:-0.02em; color:#141414;">Ce qu'on raconte</h2>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:clamp(14px,1.6vw,22px);">
+
+      <article data-reveal style="border:2px solid #000; background:#fff9ee; padding:26px 24px 28px; display:flex; flex-direction:column;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;"><span style="font-family:'Space Mono',monospace; font-size:12px;">R.01</span><span style="width:16px; height:16px; border-radius:50%; background:#fbc904; border:2px solid #000;"></span></div>
+        <h3 style="margin:0; font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:26px; line-height:0.95;">Culture</h3>
+        <div style="font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; color:#af2a16; margin:8px 0 12px;">Le saviez-vous ? · Culture G.</div>
+        <p style="margin:0; font-size:14px; line-height:1.5; color:#3a3a3a; text-wrap:pretty;">Le créateur africain derrière une grande œuvre — peinture, archi, cover, beatmaking, makeup — dont tout le monde ignore le nom. Son quotidien après le succès, et ce qui a changé.</p>
+      </article>
+
+      <article data-reveal style="border:2px solid #000; background:#fff9ee; padding:26px 24px 28px; display:flex; flex-direction:column;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;"><span style="font-family:'Space Mono',monospace; font-size:12px;">R.02</span><span style="width:16px; height:16px; border-radius:50%; background:#155dd5; border:2px solid #000;"></span></div>
+        <h3 style="margin:0; font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:26px; line-height:0.95;">Focus</h3>
+        <div style="font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; color:#af2a16; margin:8px 0 12px;">Le marché de l'art</div>
+        <p style="margin:0; font-size:14px; line-height:1.5; color:#3a3a3a; text-wrap:pretty;">Peut-on vivre de l'art en Afrique ? Royalties, droits, reconnaissance, réalités d'une organisation de spectacle. L'art en Côte d'Ivoire : effet de mode ? Micro-trottoir.</p>
+      </article>
+
+      <article data-reveal style="border:2px solid #000; background:#fff9ee; padding:26px 24px 28px; display:flex; flex-direction:column;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;"><span style="font-family:'Space Mono',monospace; font-size:12px;">R.03</span><span style="width:16px; height:16px; border-radius:50%; background:#af2a16; border:2px solid #000;"></span></div>
+        <h3 style="margin:0; font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:26px; line-height:0.95;">Coulisse</h3>
+        <div style="font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; color:#af2a16; margin:8px 0 12px;">Silence, ça tourne</div>
+        <p style="margin:0; font-size:14px; line-height:1.5; color:#3a3a3a; text-wrap:pretty;">Ce qu'on ne voit pas : le script, le croquis, la direction artistique, les idées. Un tournage ou la création d'un projet en cours, de l'intérieur.</p>
+      </article>
+
+      <article data-reveal style="border:2px solid #000; background:#fff9ee; padding:26px 24px 28px; display:flex; flex-direction:column;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;"><span style="font-family:'Space Mono',monospace; font-size:12px;">R.04</span><span style="width:16px; height:16px; border-radius:50%; background:#fd6b04; border:2px solid #000;"></span></div>
+        <h3 style="margin:0; font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:26px; line-height:0.95;">Y'a quel plan ?</h3>
+        <div style="font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; color:#af2a16; margin:8px 0 12px;">Les lieux</div>
+        <p style="margin:0; font-size:14px; line-height:1.5; color:#3a3a3a; text-wrap:pretty;">HUB, nouvelle boutique, atelier, galerie, studio photo, rassemblement créatif, live, conférence, librairie. Où ça se passe, maintenant.</p>
+      </article>
+
+      <article data-reveal style="border:2px solid #000; background:#fff9ee; padding:26px 24px 28px; display:flex; flex-direction:column;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;"><span style="font-family:'Space Mono',monospace; font-size:12px;">R.05</span><span style="width:16px; height:16px; border-radius:50%; background:#fca1d3; border:2px solid #000;"></span></div>
+        <h3 style="margin:0; font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:26px; line-height:0.95;">Tips</h3>
+        <div style="font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; color:#af2a16; margin:8px 0 12px;">Silhouette</div>
+        <p style="margin:0; font-size:14px; line-height:1.5; color:#3a3a3a; text-wrap:pretty;">Tutos design et conseils mode. Le savoir-faire transmis, sans chichi — pour ceux qui fabriquent.</p>
+      </article>
+
+      <article data-reveal style="border:2px solid #000; background:#fff9ee; padding:26px 24px 28px; display:flex; flex-direction:column;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;"><span style="font-family:'Space Mono',monospace; font-size:12px;">R.06</span><span style="width:16px; height:16px; border-radius:50%; background:#039c4b; border:2px solid #000;"></span></div>
+        <h3 style="margin:0; font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:26px; line-height:0.95;">Au-delà des frontières</h3>
+        <div style="font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; color:#af2a16; margin:8px 0 12px;">La diaspora</div>
+        <p style="margin:0; font-size:14px; line-height:1.5; color:#3a3a3a; text-wrap:pretty;">Créateurs ivoiriens et africains à Paris, Londres, New York, Ottawa, Toronto, Montréal. Le talent local, à l'échelle du monde.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ================= 6. NOS COULEURS ================= -->
+  <section id="couleurs" data-bg="cream" style="position:relative; min-height:100vh; background:#fff9ee; display:flex; flex-direction:column; padding:clamp(90px,12vh,140px) clamp(20px,6vw,90px);">
+    <div style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:clamp(30px,6vh,56px);">
+      <h2 data-reveal style="margin:0; font-family:'Poppins',sans-serif; font-weight:800; font-size:clamp(40px,8vw,110px); line-height:0.9; letter-spacing:-0.03em; color:#141414;">nos couleurs</h2>
+      <span style="font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#af2a16;">06 / Palette — 8 tons</span>
+    </div>
+    <div style="flex:1; display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); grid-auto-rows:1fr; gap:0; border:2px solid #000; min-height:clamp(340px,52vh,560px);">
+      <div style="display:flex; align-items:center; justify-content:center; background:#fbc904; border-right:2px solid #000; border-bottom:2px solid #000; font-family:'Space Mono',monospace; font-weight:700; font-size:clamp(15px,1.7vw,22px); color:#000;">fbc904</div>
+      <div style="display:flex; align-items:center; justify-content:center; background:#fd6b04; border-right:2px solid #000; border-bottom:2px solid #000; font-family:'Space Mono',monospace; font-weight:700; font-size:clamp(15px,1.7vw,22px); color:#000;">fd6b04</div>
+      <div style="display:flex; align-items:center; justify-content:center; background:#fcedd5; border-right:2px solid #000; border-bottom:2px solid #000; font-family:'Space Mono',monospace; font-weight:700; font-size:clamp(15px,1.7vw,22px); color:#af2a16;">fcedd5</div>
+      <div style="display:flex; align-items:center; justify-content:center; background:#155dd5; border-bottom:2px solid #000; font-family:'Space Mono',monospace; font-weight:700; font-size:clamp(15px,1.7vw,22px); color:#fff9ee;">155dd5</div>
+      <div style="display:flex; align-items:center; justify-content:center; background:#af2a16; border-right:2px solid #000; font-family:'Space Mono',monospace; font-weight:700; font-size:clamp(15px,1.7vw,22px); color:#fff9ee;">af2a16</div>
+      <div style="display:flex; align-items:center; justify-content:center; background:#fca1d3; border-right:2px solid #000; font-family:'Space Mono',monospace; font-weight:700; font-size:clamp(15px,1.7vw,22px); color:#000;">fca1d3</div>
+      <div style="display:flex; align-items:center; justify-content:center; background:#039c4b; border-right:2px solid #000; font-family:'Space Mono',monospace; font-weight:700; font-size:clamp(15px,1.7vw,22px); color:#fff9ee;">039c4b</div>
+      <div style="display:flex; align-items:center; justify-content:center; background:#000000; font-family:'Space Mono',monospace; font-weight:700; font-size:clamp(15px,1.7vw,22px); color:#fff9ee;">000000</div>
+    </div>
+  </section>
+
+  <!-- ================= 7. PLANCHE D'IDENTITÉ ================= -->
+  <section id="identite" data-bg="cream" style="position:relative; min-height:100vh; background:#fcedd5; padding:clamp(90px,12vh,140px) clamp(20px,6vw,90px);">
+    <div style="font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:#af2a16; margin-bottom:clamp(20px,4vh,40px);">07 / Planche d'identité</div>
+    <h2 data-reveal style="margin:0 0 clamp(36px,6vh,64px); font-family:'Poppins',sans-serif; font-weight:800; font-size:clamp(34px,6vw,80px); line-height:0.92; letter-spacing:-0.03em; color:#141414;">le système</h2>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:clamp(14px,1.6vw,22px);">
+      <!-- Logo states -->
+      <div data-reveal style="border:2px solid #000; display:flex; flex-direction:column;">
+        <div style="padding:8px 12px; font-family:'Space Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.1em; border-bottom:2px solid #000; background:#fff9ee;">Logo · 2 états</div>
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:34px; background:#fff9ee; border-bottom:2px solid #000;"><img src="uploads/ROUGE.png" alt="JPEG rouge" style="width:76%;"></div>
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:34px; background:#af2a16;"><img src="uploads/BLANC.png" alt="JPEG crème" style="width:76%;"></div>
+      </div>
+      <!-- Type -->
+      <div data-reveal style="border:2px solid #000; background:#fff9ee; padding:22px 24px 26px;">
+        <div style="font-family:'Space Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:22px;">Typographie</div>
+        <div style="border-bottom:1px solid rgba(0,0,0,.15); padding-bottom:18px; margin-bottom:18px;">
+          <div style="font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:clamp(30px,4vw,50px); line-height:0.9; color:#141414;">Grotesque</div>
+          <div style="font-family:'Space Mono',monospace; font-size:11px; color:#af2a16; margin-top:8px;">Archivo Black · titres & labels · caps</div>
+        </div>
+        <div style="border-bottom:1px solid rgba(0,0,0,.15); padding-bottom:18px; margin-bottom:18px;">
+          <div style="font-family:'Poppins',sans-serif; font-weight:800; font-size:clamp(26px,3.4vw,42px); line-height:0.95; color:#141414;">nos couleurs</div>
+          <div style="font-family:'Space Mono',monospace; font-size:11px; color:#af2a16; margin-top:8px;">Poppins Bold · titres doux · bas de casse</div>
+        </div>
+        <div>
+          <div style="font-family:'DM Sans',sans-serif; font-size:18px; line-height:1.4; color:#141414;">Corps de texte propre et lisible, pensé pour l'écran et l'édition.</div>
+          <div style="font-family:'Space Mono',monospace; font-size:11px; color:#af2a16; margin-top:8px;">DM Sans · corps · Space Mono · data / hex</div>
+        </div>
+      </div>
+      <!-- Motifs -->
+      <div data-reveal style="border:2px solid #000; background:#fff9ee; padding:22px 24px 26px; display:flex; flex-direction:column; gap:18px;">
+        <div style="font-family:'Space Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.1em;">Motifs · compression</div>
+        <div>
+          <div style="font-family:'Space Mono',monospace; font-size:10px; color:#af2a16; margin-bottom:6px;">Décalage RGB</div>
+          <div style="font-family:'Archivo Black',sans-serif; font-size:clamp(28px,4vw,44px); text-transform:uppercase; text-shadow:5px 0 #155dd5,-5px 0 #af2a16; color:#141414;">JPEG</div>
+        </div>
+        <div>
+          <div style="font-family:'Space Mono',monospace; font-size:10px; color:#af2a16; margin-bottom:6px;">Blocs de compression 8×8</div>
+          <div style="display:grid; grid-template-columns:repeat(8,1fr); border:1.5px solid #000;">
+            <span style="aspect-ratio:1; background:#fbc904;"></span><span style="aspect-ratio:1; background:#af2a16;"></span><span style="aspect-ratio:1; background:#155dd5;"></span><span style="aspect-ratio:1; background:#fcedd5;"></span><span style="aspect-ratio:1; background:#fd6b04;"></span><span style="aspect-ratio:1; background:#000;"></span><span style="aspect-ratio:1; background:#039c4b;"></span><span style="aspect-ratio:1; background:#fca1d3;"></span>
+            <span style="aspect-ratio:1; background:#155dd5;"></span><span style="aspect-ratio:1; background:#fcedd5;"></span><span style="aspect-ratio:1; background:#fca1d3;"></span><span style="aspect-ratio:1; background:#fbc904;"></span><span style="aspect-ratio:1; background:#af2a16;"></span><span style="aspect-ratio:1; background:#039c4b;"></span><span style="aspect-ratio:1; background:#fd6b04;"></span><span style="aspect-ratio:1; background:#000;"></span>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'Space Mono',monospace; font-size:10px; color:#af2a16; margin-bottom:6px;">Datamosh · bandes</div>
+          <div style="height:26px; background:linear-gradient(90deg,#fbc904 0 14%,#fd6b04 14% 28%,#af2a16 28% 45%,#fca1d3 45% 58%,#155dd5 58% 74%,#039c4b 74% 88%,#000 88% 100%); border:1.5px solid #000;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 8. FOOTER ================= -->
+  <section id="contact" data-bg="red" style="position:relative; min-height:100vh; background:#af2a16; color:#fff9ee; display:flex; flex-direction:column; justify-content:space-between; padding:clamp(90px,12vh,130px) clamp(20px,6vw,90px) clamp(30px,5vh,50px);">
+    <div style="font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; opacity:0.8;">08 / Yakoi ?</div>
+    <div style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:clamp(20px,4vh,34px); flex:1; justify-content:center;">
+      <img data-parallax="0.05" src="uploads/BLANC.png" alt="JPEG" style="width:min(82vw,760px);">
+      <div style="font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:clamp(18px,2.6vw,34px); letter-spacing:-0.01em; animation:flick 5s steps(1) infinite;">Le média d'art — 2026</div>
+      <a href="mailto:hello@lejpeg.art" style="font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(18px,2.6vw,30px); color:#fff9ee; border-bottom:3px solid #fbc904; padding-bottom:3px;">hello@lejpeg.art</a>
+      <div style="display:flex; gap:clamp(16px,3vw,40px); flex-wrap:wrap; justify-content:center; font-family:'Space Mono',monospace; font-size:13px; letter-spacing:0.1em; text-transform:uppercase;">
+        <a href="#" style="color:#fff9ee;">Instagram</a>
+        <a href="#" style="color:#fff9ee;">TikTok</a>
+        <a href="#" style="color:#fff9ee;">YouTube</a>
+        <a href="#" style="color:#fff9ee;">X / Twitter</a>
+      </div>
+    </div>
+    <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; opacity:0.75; border-top:1.5px solid rgba(255,249,238,.3); padding-top:16px;">
+      <span>© 2026 Le JPEG · Abidjan, Côte d'Ivoire</span>
+      <span>Encodé en .jpeg — qualité 100%</span>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      setRoot: (el) => { this.root = el; },
+      setHeader: (el) => { this.header = el; },
+      onBandEnter: (e) => { if (this._faisonsSelect) this._faisonsSelect(+e.currentTarget.dataset.bandIndex); },
+      onBandsLeave: () => { if (this._faisonsResume) this._faisonsResume(); },
+    };
+  }
+
+  componentDidMount() {
+    const root = this.root;
+    if (!root) return;
+    const header = this.header;
+    const LOGO_RED = 'uploads/ROUGE.png';
+    const LOGO_CREAM = 'uploads/BLANC.png';
+
+    // Reveal + glitch burst on enter
+    const revEls = Array.from(root.querySelectorAll('[data-reveal]'));
+    revEls.forEach((el) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(34px)';
+      el.style.transition = 'opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1)';
+    });
+    const io = new IntersectionObserver((ents) => {
+      ents.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+        if (el.hasAttribute('data-glitch')) {
+          el.style.animation = 'none';
+          void el.offsetWidth;
+          el.style.animation = 'glitchBurst .55s steps(2,end) 1';
+        }
+        io.unobserve(el);
+      });
+    }, { threshold: 0.18 });
+    revEls.forEach((el) => io.observe(el));
+
+    // Parallax + auto-switching header logo/colors
+    const pxEls = Array.from(root.querySelectorAll('[data-parallax]'));
+    const sections = Array.from(root.querySelectorAll('section[data-bg]'));
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const vh = window.innerHeight;
+      pxEls.forEach((el) => {
+        const sp = parseFloat(el.getAttribute('data-parallax')) || 0.1;
+        const r = el.getBoundingClientRect();
+        const off = (r.top + r.height / 2) - vh / 2;
+        el.style.transform = `translateY(${(-off * sp).toFixed(1)}px)`;
+      });
+      if (header) {
+        const hb = header.getBoundingClientRect().bottom;
+        let bg = 'cream';
+        for (const s of sections) {
+          const r = s.getBoundingClientRect();
+          if (r.top <= hb && r.bottom > hb) { bg = s.getAttribute('data-bg'); break; }
+        }
+        const onRed = bg === 'red';
+        const img = header.querySelector('img');
+        if (img) {
+          const want = onRed ? LOGO_CREAM : LOGO_RED;
+          if (!img.getAttribute('src') || !img.getAttribute('src').endsWith(want)) img.setAttribute('src', want);
+        }
+        header.style.color = onRed ? '#fff9ee' : '#141414';
+        const line = header.querySelector('[data-headerline]');
+        if (line) line.style.background = onRed ? 'rgba(255,249,238,.28)' : 'rgba(20,20,20,.18)';
+      }
+    };
+    const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    this._onScroll = onScroll;
+
+    // Section "Quoi ?" — animated category selection (auto-cycle + hover)
+    const fSection = root.querySelector('#faisons');
+    if (fSection) {
+      const fBands = Array.from(fSection.querySelectorAll('[data-band]'));
+      const fLabels = Array.from(fSection.querySelectorAll('[data-side-label]'));
+      const fMarker = fSection.querySelector('[data-side-marker]');
+      const fColors = ['#fca1d3', '#155dd5', '#fbc904', '#fd6b04', '#af2a16', '#155dd5', '#fbc904', '#fca1d3'];
+      let fActive = -1;
+      const apply = (i) => {
+        if (i === fActive) return;
+        fActive = i;
+        fBands.forEach((b, idx) => {
+          const on = idx === i;
+          const dot = b.querySelector('[data-band-dot]');
+          const lbl = b.querySelector('[data-band-label]');
+          if (dot) dot.style.transform = on ? 'scale(1.5)' : 'scale(1)';
+          if (lbl) lbl.style.transform = on ? 'translateX(20px)' : 'translateX(0)';
+        });
+        fLabels.forEach((s, idx) => {
+          const on = idx === i;
+          s.style.color = on ? '#141414' : 'rgba(20,20,20,.3)';
+          s.style.transform = on ? 'rotate(90deg) scale(1.16)' : 'rotate(90deg) scale(1)';
+        });
+        if (fMarker) {
+          fMarker.style.transform = `translateY(${i * 100}%)`;
+          fMarker.style.borderLeftColor = fColors[i];
+        }
+      };
+      const startAuto = () => {
+        if (this._fInt) clearInterval(this._fInt);
+        this._fInt = setInterval(() => { apply((fActive + 1) % fBands.length); }, 1700);
+      };
+      const stopAuto = () => { if (this._fInt) { clearInterval(this._fInt); this._fInt = null; } };
+      this._faisonsSelect = (i) => { stopAuto(); apply(i); };
+      this._faisonsResume = () => { startAuto(); };
+      apply(0);
+      startAuto();
+    }
+  }
+
+  componentWillUnmount() {
+    if (this._onScroll) {
+      window.removeEventListener('scroll', this._onScroll);
+      window.removeEventListener('resize', this._onScroll);
+    }
+    if (this._fInt) clearInterval(this._fInt);
+  }
+}
+</script>
+</body>
+</html>
